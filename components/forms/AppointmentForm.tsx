@@ -33,8 +33,6 @@ export const AppointmentForm = ({
   const [isLoading, setIsLoading] = useState(false);
   const AppointmentFormValidation = getAppointmentSchema(type);
 
-  console.log(appointment);
-
   const form = useForm<z.infer<typeof AppointmentFormValidation>>({
     resolver: zodResolver(AppointmentFormValidation),
     defaultValues: {
@@ -47,8 +45,6 @@ export const AppointmentForm = ({
   })
 
   async function onSubmit(values: z.infer<typeof AppointmentFormValidation>) {
-    console.log("i am submitting");
-    console.log(type);
     setIsLoading(true);
 
     let status;
@@ -63,10 +59,9 @@ export const AppointmentForm = ({
         status = 'pending';
         break;
     }
-    console.log("log the type", {type});
+
     try {
       if(type === 'create' && patientId) {
-        console.log('updating appointment');
         const appointmentData = {
           userId,
           patient: patientId,
