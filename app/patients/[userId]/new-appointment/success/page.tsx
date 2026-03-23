@@ -6,8 +6,10 @@ import { Doctors } from '@/constants';
 import { formatDateTime } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 
-const Success = async ({ params: { userId }, searchParams }: SearchParamProps) => {
-  const appointmentId = (searchParams?.appointmentId as string) || '';
+const Success = async (props: SearchParamProps) => {
+  const params = await props.params;
+  const userId = params.userId;
+  const appointmentId = (props.searchParams?.appointmentId as string) || '';
   const appointment = await getAppointment(appointmentId);
 
   const doctor = Doctors.find((doc) => doc.name === appointment.primaryPhysician);

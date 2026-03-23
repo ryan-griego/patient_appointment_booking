@@ -6,7 +6,7 @@ import { columns } from "@/components/table/columns";
 import { getRecentAppointmentList } from '@/lib/actions/appointment.actions';
 import { DataTable } from '@/components/table/DataTable';
 
-
+export const dynamic = 'force-dynamic';
 
 const Admin = async () => {
   const appointments = await getRecentAppointmentList()

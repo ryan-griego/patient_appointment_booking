@@ -41,10 +41,18 @@ export const PatientForm = () => {
 
     try {
       const userData = { name, email, phone };
+      console.log('PatientForm: Submitting user data:', userData);
       const user = await createUser(userData);
-      if(user) router.push(`/patients/${user.$id}/register`)
+      console.log('PatientForm: User created:', user);
+      if(user) {
+        console.log('PatientForm: Redirecting to register page with userId:', user.$id);
+        router.push(`/patients/${user.$id}/register`)
+      } else {
+        console.error('PatientForm: User creation returned null');
+      }
     } catch (error) {
-      console.log(error)
+      console.error('PatientForm: Error creating user:', error);
+      alert(`Error: ${error instanceof Error ? error.message : 'Failed to create user'}`);
     }
     setIsLoading(false);
 
